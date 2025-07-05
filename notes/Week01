@@ -1,0 +1,135 @@
+ Question 1 5 pts
+What is the Big O performance of the SortArray function?
+Group of answer choices
+O(n log n)
+O(2^n)
+O(log n)
+O(n^2) --> This is the correct one
+O(n)
+O(1)
+
+Why?
+Because the function contains two nested loops:
+    The outer loop runs from data.Length -1 to 0, which has a complexity of O(n)
+    The inner loop runs from 0 to sortPos, which also has a complexity of O(n)
+That been said, we have O(n) x  O(n) = O(n^2)
+
+
+ Question 2
+What is the Big O performance of the StandardDeviation1 function?
+Group of answer choices
+O(1)
+O(n) --> the Correct one!
+O(log n)
+O(n^2)
+O(n log n)
+O(2^n)
+
+The reason is that the two loops are not nested, but rather sequential. The first loop calculates the sum and count of the numbers, and the second loop calculates the sum of squared differences.
+
+In Big O notation, when you have sequential operations, you add their complexities. In this case:
+
+The first loop has a complexity of O(n).
+The second loop also has a complexity of O(n).
+When you add these complexities, you get O(n)+O(n)=O(2n). However, in Big O notation, constant factors are ignored, so O(2n) simplifies to O(n).
+
+So, the overall time complexity of the StandardDeviation1 function is indeed O(n).
+
+It's worth noting that this function can be optimized to calculate the mean and standard deviation in a single pass, which would still have a time complexity of O(n) but with a lower constant factor.
+
+
+
+Flag question: Question 3
+Question 3 5 pts
+What is the Big O performance of the StandardDeviation2 function?
+Group of answer choices
+O(log n)
+O(n log n)
+O(n)
+O(2^n)
+O(n^2)
+O(1)
+
+Flag question: Question 4
+Question 4 5 pts
+What is the Big O performance of the StandardDeviation3 function?
+Group of answer choices
+O(1)
+O(log n)
+O(n^2)
+O(2^n)
+O(n)
+O(n log n)
+
+Flag question: Question 5
+Question 5 5 pts
+Which of the following is the smallest (assuming n is large)?
+Group of answer choices
+O(1)
+O(2^n)
+O(log n)
+O(n^2)
+O(n log n)
+O(n)
+
+Flag question: Question 6
+Question 6 5 pts
+Which of the following is the largest (assuming n is large)?
+Group of answer choices
+O(log n)
+O(2^n)
+O(n)
+O(n log n)
+O(n^2)
+O(1)
+
+Flag question: Question 7
+Question 7 5 pts
+Which is the smallest of the following (assuming n is large)?
+Group of answer choices
+O(n)
+O(log n)
+O(n log n)
+
+Flag question: Question 8
+Question 8 5 pts
+What is the performance (using big O notation) for the SearchSorted1 function? ?
+Group of answer choices
+O(n^2)
+O(log n)
+O(2^n)
+O(n)
+O(1)
+O(n log n)
+
+Flag question: Question 9
+Question 9 5 pts
+What is the performance (using big O notation) for the SearchSorted2 function?
+Group of answer choices
+O(n log n)
+O(2^n)
+O(n^2)
+O(n)
+O(1)
+O(log n)
+
+The time complexity of the SearchSorted2 function is O(log n).
+
+Here's why:
+
+The function uses a recursive binary search approach, dividing the search space in half at each step.
+The number of operations (comparisons and recursive calls) grows logarithmically with the size of the input array.
+To be more precise, the time complexity can be analyzed as follows:
+
+The function makes a constant number of operations (comparisons and calculations) at each recursive call.
+The size of the search space is reduced by half at each recursive call.
+The maximum number of recursive calls is proportional to the logarithm of the size of the input array.
+Therefore, the time complexity is O(log n), where n is the length of the input array.
+
+
+Flag question: Question 10
+Question 10 5 pts
+Which function (SearchSorted1 or SearchSorted2) has the better performance?
+Group of answer choices
+SearchSorted2
+SearchSorted1

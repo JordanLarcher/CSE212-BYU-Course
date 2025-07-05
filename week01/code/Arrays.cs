@@ -8,12 +8,20 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // first I have to create an array of the specified length
+        double[] result = new double[length];
 
-        return []; // replace this return statement with your own
+
+        // Then I will loop over the length of the array 
+        // and fill it with the multiples of a given number
+        for (int i = 0; i < length; i++)
+        {
+            // In the first iteration // I will multiply the number by 1, then by 2, and so on
+            // until I reach the length of the array 
+            // so each time it will be multiplied by ( i + 1)
+            result[i] = number * (i + 1);
+        }
+        return result;
     }
 
     /// <summary>
@@ -25,9 +33,19 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // First I will check if the amount is greater than 0 and less than or equal to the count of the
+        // data list, if not I will throw an exception
+        if (amount < 1 || amount > data.Count)
+        {
+            throw new ArgumentException("Amount must be between 1 and the count of the data list, inclusive.");
+
+        }
+        // Then I will create a temporary list to hold the last amount of elements
+        List<int> tempArrayList = data.GetRange(data.Count - amount, amount);
+        // I will remove the last amount of elements from the data list 
+        data.RemoveRange(data.Count - amount, amount);
+        // Then I need to insert the temporary list at the beginning of the data list by using InsertRange method
+        data.InsertRange(0, tempArrayList);
+        
     }
 }
