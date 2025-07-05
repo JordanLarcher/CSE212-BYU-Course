@@ -40,12 +40,16 @@ public static class Arrays
             throw new ArgumentException("Amount must be between 1 and the count of the data list, inclusive.");
 
         }
-        // Then I will create a temporary list to hold the last amount of elements
+        // Then I will create a temporary list to hold the last amount of elements by Using the suggested 
+        // GetRange method of the List class
         List<int> tempArrayList = data.GetRange(data.Count - amount, amount);
-        // I will remove the last amount of elements from the data list 
+        // I will remove the last amount of elements from the data list by using the RemoveRange method
+        // of the List class
         data.RemoveRange(data.Count - amount, amount);
         // Then I need to insert the temporary list at the beginning of the data list by using InsertRange method
+        // The InsertRange method allows me to insert a list or collection of elements at a specified index
+        // in the data list, in this case, it will be at index 0
         data.InsertRange(0, tempArrayList);
-        
+
     }
 }
