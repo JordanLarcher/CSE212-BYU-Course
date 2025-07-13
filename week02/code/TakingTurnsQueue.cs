@@ -1,3 +1,6 @@
+using Newtonsoft.Json.Serialization;
+
+
 /// <summary>
 /// This queue is circular.  When people are added via AddPerson, then they are added to the 
 /// back of the queue (per FIFO rules).  When GetNextPerson is called, the next person
@@ -40,9 +43,17 @@ public class TakingTurnsQueue
         else
         {
             Person person = _people.Dequeue();
-            if (person.Turns > 1)
+            // Correction: The person returns to the queue if it has infinite turns (<=0) or
+            // if there is 1 turn left
+
+            if (person.Turns <= 0 || person.Turns > 1)
             {
-                person.Turns -= 1;
+
+                // Turns are decremented only if the person has fixed turns 
+                if (person.Turns > 1)
+                {
+                    person.Turns -= 1;
+                }
                 _people.Enqueue(person);
             }
 
