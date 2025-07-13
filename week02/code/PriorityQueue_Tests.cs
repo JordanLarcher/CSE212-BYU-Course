@@ -23,7 +23,7 @@ public class PriorityQueueTests
 
     [TestMethod]
     // Scenario: Enqueue two items with the same priority, and dequeue both
-    // Expected Result: The first inserted item is dequeued first.
+    // Expected Results: The first inserted item is dequeued first.
     // Defect(s) Found: 
     public void TestPriorityQueue_2()
     {
@@ -52,7 +52,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Enqueue items with negative priorities.
     // Expected Result: Highest (least negative) priority dequeued first.
-    // Defect(s) Found:
+    // Defect(s) Found: Order in which highest priority is checked
     public void TestPriorityQueue_NegativePriorities()
     {
         var priorityQueue = new PriorityQueue();
@@ -60,9 +60,9 @@ public class PriorityQueueTests
         priorityQueue.Enqueue("Mind", -3);
         priorityQueue.Enqueue("ABC", -4);
 
-        Assert.AreEqual("ABC", priorityQueue.Dequeue()); 
-        Assert.AreEqual("Mind", priorityQueue.Dequeue()); 
         Assert.AreEqual("Master", priorityQueue.Dequeue()); 
+        Assert.AreEqual("Mind", priorityQueue.Dequeue()); 
+        Assert.AreEqual("ABC", priorityQueue.Dequeue()); 
     }
 
 }
