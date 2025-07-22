@@ -32,7 +32,22 @@ public class Maze
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        if (!_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+
+            // Here I'm validating that maze exists
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // Here I'm validating left flag (index on 0)
+        if (!directions[0])
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // If ok we move left
+        _currX--;
+
     }
 
     /// <summary>
@@ -41,7 +56,22 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        //Same logic but with index 1
+        if (!_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+
+            // Here I'm validating that maze exists
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+
+        if (!directions[1])
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // If ok we move Right
+        _currX++;
     }
 
     /// <summary>
@@ -50,7 +80,21 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        //Same logic but with index 2
+        if (!_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+
+            // Here I'm validating that maze exists
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        if (!directions[2])
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // If ok we move Right
+        _currY--;
     }
 
     /// <summary>
@@ -59,7 +103,21 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        //Same logic but with index 3
+        if (!_mazeMap.TryGetValue((_currX, _currY), out bool[] directions))
+        {
+
+            // Here I'm validating that maze exists
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        if (!directions[3])
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
+        // If ok we move Down
+        _currY++;
     }
 
     public string GetStatus()
