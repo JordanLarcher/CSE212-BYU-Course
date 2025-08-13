@@ -193,7 +193,7 @@ public class SolveMazeTests
     {
         var results = new List<string>();
         Maze smallMaze = new(3, 3, [1, 1, 1, 1, 0, 1, 1, 1, 2]);
-        Recursion.SolveMaze(results, smallMaze);
+        Recursion.SolveMaze(results, smallMaze, 0, 0, new List<ValueTuple<int, int>>());
 
         results.Sort();
         var expected = new List<string> {
@@ -231,7 +231,7 @@ public class SolveMazeTests
                 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 2
             ]);
 
-        Recursion.SolveMaze(results, bigMaze);
+        Recursion.SolveMaze(results, bigMaze, 0, 0, new List<ValueTuple<int, int>>());
 
         results.Sort();
         var expected = new List<string> {

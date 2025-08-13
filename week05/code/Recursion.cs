@@ -15,7 +15,11 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
-        return 0;
+        if (n <= 0)
+        {
+            return 0;
+        }
+        return n * n + SumSquaresRecursive(n - 1);
     }
 
     /// <summary>
@@ -39,7 +43,26 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
-        // TODO Start Problem 2
+        if (word.Length == size)
+        {
+            results.Add(word);
+            return;
+        }
+
+        for (int i = 0; i < letters.Length; i++)
+        {
+
+            string newWord = word + letters[i];
+            // Remove the letter at index i from the letters string
+            // and call the function recursively with the new word.
+            // This will ensure that we do not use the same letter
+
+            // Create a new list without the letter at index i 
+            string remainingLetters = letters.Remove(i, 1);
+
+            // Call the function recursively with the new word and remaining letters
+            PermutationsChoose(results, remainingLetters, size, newWord);
+        }
     }
 
     /// <summary>
@@ -86,20 +109,33 @@ public static class Recursion
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null)
     {
+
+        // Initialize the dictionary if it is null or the first time running the function
+        // This will be used for memoization to store previously calculated results
+        if (remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
         // Base Cases
         if (s == 0)
-            return 0;
-        if (s == 1)
-            return 1;
-        if (s == 2)
-            return 2;
-        if (s == 3)
-            return 4;
+            return 1; // There's one way to climb 0 stairs (do nothing)
+        if (s < 0)
+            return 0; // Cannot climb negative stairs
 
-        // TODO Start Problem 3
+        // Should check if the result for the current value is already calculated
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + 
+                       CountWaysToClimb(s - 2, remember) + 
+                       CountWaysToClimb(s - 3, remember);
+        
+        // Store the result in the dictionary for memoization
+        remember[s] = ways;
         return ways;
     }
 
@@ -119,25 +155,65 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        int wildCardIndex = pattern.IndexOf('*');
+
+        // base case: if there are no wildcards, then we add the pattern to results
+        if (wildCardIndex == -1)
+        {
+            results.Add(pattern);
+            return;
+        }
+        // recursive case: replace the wildcard with '0' and '1' and call the function recursively
+        string patternWithZero = pattern.Substring(0, wildCardIndex) + '0' + pattern.Substring(wildCardIndex + 1);
+        WildcardBinary(patternWithZero, results);
+
+        string patternWithOne = pattern.Substring(0, wildCardIndex) + '1' + pattern.Substring(wildCardIndex + 1);
+        WildcardBinary(patternWithOne, results);
     }
+
 
     /// <summary>
     /// Use recursion to insert all paths that start at (0,0) and end at the
     /// 'end' square into the results list.
     /// </summary>
-    public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
-    {
-        // If this is the first time running the function, then we need
-        // to initialize the currPath list.
-        if (currPath == null) {
-            currPath = new List<ValueTuple<int, int>>();
+    /// <param name="results">The list that will store the found paths</param>
+    /// <param name="maze">The maze to solve</param>
+    /// <param name="currX">The current x position in the maze</param>
+    /// <param name="currY">The current y position in the maze</param>
+    /// <param name="currPath">The path taken to get to the current position</param>
+    public static void SolveMaze(List<string> results, Maze maze, int currX, int currY, List<ValueTuple<int, int>> currPath) {
+        // Add the current position to the path
+        currPath.Add((currX, currY));
+
+        // Base Case: If we are at the end, add the path to the results
+        if (maze.IsEnd(currX, currY)) {
+            results.Add(currPath.AsString());
+        }
+        else {
+            // Recursive Step: Try to move in all four directions
+            
+            // Move Up
+            if (maze.IsValidMove(currPath, currX, currY - 1)) {
+                SolveMaze(results, maze, currX, currY - 1, currPath);
+            }
+
+            // Move Down
+            if (maze.IsValidMove(currPath, currX, currY + 1)) {
+                SolveMaze(results, maze, currX, currY + 1, currPath);
+            }
+
+            // Move Left
+            if (maze.IsValidMove(currPath, currX - 1, currY)) {
+                SolveMaze(results, maze, currX - 1, currY, currPath);
+            }
+
+            // Move Right
+            if (maze.IsValidMove(currPath, currX + 1, currY)) {
+                SolveMaze(results, maze, currX + 1, currY, currPath);
+            }
         }
         
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
-
-        // TODO Start Problem 5
-        // ADD CODE HERE
-
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        // Backtrack: Remove the current position from the path before returning
+        currPath.RemoveAt(currPath.Count - 1);
     }
 }
